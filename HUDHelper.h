@@ -1,0 +1,52 @@
+//
+//  HUDHelper.h
+//  ProjectDemo
+//
+//  Created by 方远 on 2017/2/27.
+//  Copyright © 2017年 方远. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "NSObject+CommonBlock.h"
+#import "MBProgressHUD.h"
+
+@interface HUDHelper : NSObject
+{
+@private
+    MBProgressHUD *_syncHUD;
+}
+
++ (HUDHelper *)sharedInstance;
+
++ (void)alert:(NSString *)msg;
++ (void)alert:(NSString *)msg action:(CommonVoidBlock)action;
++ (void)alert:(NSString *)msg cancel:(NSString *)cancel;
++ (void)alert:(NSString *)msg cancel:(NSString *)cancel action:(CommonVoidBlock)action;
++ (void)alertTitle:(NSString *)title message:(NSString *)msg cancel:(NSString *)cancel;
++ (void)alertTitle:(NSString *)title message:(NSString *)msg cancel:(NSString *)cancel action:(CommonVoidBlock)action;
+
+// 网络请求
+- (MBProgressHUD *)loading;
+- (MBProgressHUD *)loading:(NSString *)msg;
+- (MBProgressHUD *)loading:(NSString *)msg inView:(UIView *)view;
+
+- (void)loading:(NSString *)msg delay:(CGFloat)seconds execute:(void (^)())exec completion:(void (^)())completion;
+
+- (void)stopLoading:(MBProgressHUD *)hud;
+- (void)stopLoading:(MBProgressHUD *)hud message:(NSString *)msg;
+- (void)stopLoading:(MBProgressHUD *)hud message:(NSString *)msg delay:(CGFloat)seconds completion:(void (^)())completion;
+
+- (void)tipMessage:(NSString *)msg;
+- (void)tipMessage:(NSString *)msg delay:(CGFloat)seconds;
+- (void)tipMessage:(NSString *)msg delay:(CGFloat)seconds completion:(void (^)())completion;
+
+// 网络请求
+- (void)syncLoading;
+- (void)syncLoading:(NSString *)msg;
+- (void)syncLoading:(NSString *)msg inView:(UIView *)view;
+
+- (void)syncStopLoading;
+- (void)syncStopLoadingMessage:(NSString *)msg;
+- (void)syncStopLoadingMessage:(NSString *)msg delay:(CGFloat)seconds completion:(void (^)())completion;
+
+@end
